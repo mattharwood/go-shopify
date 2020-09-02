@@ -28,6 +28,22 @@ func GetProductMetafield(handle, mfnamspace, mfkey string) {
 	}
 }
 
+func SetProductMetafield(handle, namespace, key, value, valuetype string) {
+	url := urltpl() + "products/" + handle + "/metafields.json"
+	body := `
+	{
+		"metafield": {
+		  "namespace": ` + namespace + `,
+		  "key": ` + key + `,
+		  "value": ` + value + `,
+		  "value_type": ` + valuetype + `
+		}
+	  }
+	  
+	`
+	queryPost(url, body)
+}
+
 type MetafieldResponse struct {
 	Metafields []struct {
 		AdminGraphqlAPIID string `json:"admin_graphql_api_id"`
@@ -42,4 +58,11 @@ type MetafieldResponse struct {
 		Value             string `json:"value"`
 		ValueType         string `json:"value_type"`
 	} `json:"metafields"`
+}
+
+type Metafield struct {
+	Namespace string
+	Key       string
+	Value     string
+	ValueType string
 }

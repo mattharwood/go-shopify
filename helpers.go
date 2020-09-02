@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/spf13/viper"
 )
@@ -33,4 +34,11 @@ func queryGet(url string, params map[string]string) []byte {
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 
 	return bodyBytes
+}
+
+func queryPost(url, body string) {
+
+	client := &http.Client{}
+	req, err := http.NewRequest("POST", url, strings.NewReader(body))
+
 }
