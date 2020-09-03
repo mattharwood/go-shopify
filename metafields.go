@@ -29,6 +29,7 @@ func GetProductMetafield(handle, mfnamspace, mfkey string) {
 }
 
 func SetProductMetafield(handle, namespace, key, value, valuetype string) {
+	SetConfig()
 	url := urltpl() + "products/" + handle + "/metafields.json"
 	body := `
 	{
